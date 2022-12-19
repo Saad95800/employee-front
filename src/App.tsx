@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useEffect} from 'react'
+import './App.css'
+import { useAppSelector } from './redux/Hooks'
+import type {RootState} from './redux/Store'
+import 'bootstrap/dist/css/bootstrap.css'
+import SideBar from './Components/Navigation/SideBar'
+import {Routes, Route, useLocation, useNavigate} from 'react-router-dom'
+import Home from './Pages/Dashboard/Dashboard'
+import EmployeeList from './Pages/Employee/EmployeeList'
+import Login from './Pages/Login/Login'
 
 function App() {
+
+  const connected = useAppSelector((state: RootState) => state.app.connected)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="wrapper">
+
+      {connected && <SideBar />}
+      <Routes>
+          <Route path={`/`} element={<Login/>}/>
+          <Route path={`/login`} element={<Login/>}/>
+        {connected && <>
+          <Route path={`/dashboard`} element={<Home/>}/>
+          <Route path={`/employees`} element={<EmployeeList/>}/>
+        </>}
+      </Routes>
+
     </div>
-  );
+
+  )
 }
 
-export default App;
+export default App
