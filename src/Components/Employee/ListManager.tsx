@@ -1,7 +1,5 @@
 import ManagerLine from './ManagerLine'
 import { EmployeeInterface } from '../../api/UserAPI'
-import {useAppSelector} from '../../redux/Hooks'
-import type {RootState} from '../../redux/Store'
 
 export default function ListManager({employees} : {employees: EmployeeInterface[]}) {
 

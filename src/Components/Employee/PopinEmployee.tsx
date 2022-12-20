@@ -14,7 +14,10 @@ export default function PopinEmployee() {
             <div className="modal-content">
             <div className="modal-header">
                 <h5 className="modal-title">Employee info</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={()=>{
+                    dispatch(setShowModalEmployee(false))
+                    dispatch(setEmployeeSelected(null))
+                }}></button>
             </div>
             <div className="modal-body">
                 <h3>{employeeSelected?.ENAME}</h3>
@@ -29,6 +32,7 @@ export default function PopinEmployee() {
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={()=>{
                     dispatch(setShowModalEmployee(false))
+                    dispatch(setEmployeeSelected(null))
                 }}>Close</button>
             </div>
             </div>

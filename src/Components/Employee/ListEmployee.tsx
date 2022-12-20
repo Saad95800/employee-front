@@ -18,6 +18,8 @@ export default function ListEmployee({employees} : {employees: EmployeeInterface
                                 <th scope="col">Manager</th>
                                 <th scope="col">Hire date</th>
                                 <th scope="col">Department</th>
+                                <th scope="col">Sal</th>
+                                <th scope="col">Comm</th>
                                 <th scope="col" style={{width: '200px'}}>Action</th>
                             </tr>
                         </thead>

@@ -5,11 +5,14 @@ import { setPage } from '../../redux/User/UserSlice';
 import type {RootState} from '../../redux/Store'
 import PopinEmployee from '../../Components/Employee/PopinEmployee'
 import ListEmployee from '../../Components/Employee/ListEmployee';
+import PopinEditEmployeeForm from '../../Components/Employee/PopinEditEmployeeForm';
+import { setContext, setShowModalEditEmployee } from '../../redux/Employee/EmployeeSlice';
 
 export default function EmployeeList() {
 
   const dispatch = useAppDispatch();
   const employees = useAppSelector((state: RootState) => state.employee.employees)
+  const context = useAppSelector((state: RootState) => state.employee.context)
 
   useEffect(() => {
       dispatch(setPage('dashboard'))
@@ -24,6 +27,7 @@ export default function EmployeeList() {
 
 {/* start list */}
 <PopinEmployee />
+<PopinEditEmployeeForm context={context} />
 
 <div className="container mt-3">
     <div className="row align-items-center">
@@ -35,7 +39,10 @@ export default function EmployeeList() {
         <div className="col-md-6">
             <div className="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3"> 
                 <div>
-                    <a href="#" data-bs-toggle="modal" data-bs-target=".add-new" className="btn btn-primary"><i className="bx bx-plus me-1"></i> Add New</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target=".add-new" className="btn btn-primary" onClick={()=>{
+                            dispatch(setContext('add'))
+                            dispatch(setShowModalEditEmployee(true))
+                        }}><i className="bx bx-plus me-1"></i> Add New</a>
                 </div>
             </div>
         </div>

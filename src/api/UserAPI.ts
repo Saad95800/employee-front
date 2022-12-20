@@ -1,23 +1,21 @@
-import {FULL_EMPLOYEE_API} from '../utils/Data';
-import {createAsyncThunk} from '@reduxjs/toolkit';
-import http from '../utils/http-common';
-
-export const STATUS_SUB = 1;
+import {FULL_EMPLOYEE_API, FULL_EMPLOYEE_UPDATE_API, FULL_EMPLOYEE_ADD_API} from '../utils/Data'
+import {createAsyncThunk} from '@reduxjs/toolkit'
+import http from '../utils/http-common'
 
 export interface EmployeeInterface {
-    "EMPNO": number;
+    "EMPNO"?: number;
     "ENAME": string;
     "JOB": string;
-    "MGR": string;
-    "HIREDATE": string;
-    "SAL": number;
-    "COMM": number;
-    "DNAME": number;
+    "MGR"?: string;
+    "MGRNO": number;
+    "HIREDATE"?: string;
+    "SAL"?: number | null;
+    "COMM"?: number | null;
+    "DNAME"?: number;
+    "DEPTNO": number;
     "subordinates"?: EmployeeInterface[];
     "directAndIndirectSubordinates"?: EmployeeInterface[];
 }
-
-/*__________________________________________*/
 
 interface ValidationErrorsUser {
     errorMessage: string
@@ -28,56 +26,7 @@ interface ValidationErrorsUser {
     error?: boolean
 }
 
-// interface DataUserLogin {
-//     token: string,
-//     user: User
-// }
-
-// export const getUserByToken = createAsyncThunk<DataUserLogin, { token: string }, { rejectValue: ValidationErrorsUser }>('users/getUserByToken', async (dt, {rejectWithValue}) => {
-//     const response = (await http.get(FULL_USER_TOKEN_API, {
-//         headers: {'Authorization': 'Bearer ' + dt.token, 'Content-type': 'application/json'}
-//     })).data
-
-//     return {
-//         logged: true,
-//         token: dt.token,
-//         user: response[0]
-//     }
-// })
-
-/*____________________________*/
-
-// interface UserLogin {
-//     token: string,
-//     username: string
-// }
-
-// export const loginUser = createAsyncThunk<UserLogin, { username: string, password: string }, { rejectValue: ValidationErrorsUser }>('users/login', async (userData, {rejectWithValue}) => {
-//     const response = (await http.post(FULL_LOGIN_API, userData)).data
-
-//     return {
-//         token: response.token,
-//         username: userData.username
-//     }
-// })
-
-// /*__________________________*/
-
-// interface FetchUser {
-//     user: User
-// }
-
-// export const fetchUserById = createAsyncThunk<FetchUser, { token: string, id_user: number }, { rejectValue: ValidationErrorsUser }>('users/fetchUserById', async (dt, {rejectWithValue}) => {
-//     const response = (await http.get(FULL_GET_USER_API + dt.id_user, {
-//         headers: {'Authorization': 'Bearer ' + dt.token, 'Content-type': 'application/json'}
-//     })).data
-
-//     return {
-//         user: response
-//     }
-// })
-
-export const fetchEmployees = createAsyncThunk<{employees: EmployeeInterface[]},{job: string},{rejectValue: ValidationErrorsUser}>('trombinoscope/getUsers', async (dt, { rejectWithValue }) => {
+export const fetchEmployees = createAsyncThunk<{employees: EmployeeInterface[]},{job: string},{rejectValue: ValidationErrorsUser}>('employee/fetchEmployees', async (dt, { rejectWithValue }) => {
 
     const response = (await http.post(
         FULL_EMPLOYEE_API,
@@ -86,6 +35,32 @@ export const fetchEmployees = createAsyncThunk<{employees: EmployeeInterface[]},
   
     return {
       employees: response.employees
+    }
+  
+})
+
+export const updateEmployee = createAsyncThunk<{response: any},EmployeeInterface,{rejectValue: ValidationErrorsUser}>('employee/updateEmployee', async (dt, { rejectWithValue }) => {
+
+    const response = (await http.post(
+        FULL_EMPLOYEE_UPDATE_API + dt.EMPNO,
+        JSON.stringify(dt),
+        )).data
+  
+    return {
+        response: response
+    }
+  
+})
+
+export const addEmployee = createAsyncThunk<{response: any},EmployeeInterface,{rejectValue: ValidationErrorsUser}>('employee/updateEmployee', async (dt, { rejectWithValue }) => {
+
+    const response = (await http.post(
+        FULL_EMPLOYEE_ADD_API,
+        JSON.stringify(dt),
+        )).data
+  
+    return {
+        response: response
     }
   
 })

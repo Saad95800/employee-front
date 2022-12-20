@@ -8,14 +8,17 @@ import {Routes, Route, useLocation, useNavigate} from 'react-router-dom'
 import Home from './Pages/Dashboard/Dashboard'
 import EmployeeList from './Pages/Employee/EmployeeList'
 import Login from './Pages/Login/Login'
+import Message from './Components/Message'
 
 function App() {
 
   const connected = useAppSelector((state: RootState) => state.app.connected)
-
+  const showMessage = useAppSelector((state) => state.message.showMessage)
+  
   return (
     <div id="wrapper">
 
+      {showMessage && <Message />}
       {connected && <SideBar />}
       <Routes>
           <Route path={`/`} element={<Login/>}/>
