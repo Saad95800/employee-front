@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import MessageReducer from './Message/MessageSlice'
 import EmployeeReducer from './Employee/EmployeeSlice'
-import userReducer from './User/UserSlice';
 
 export const store = configureStore({
   reducer: {
-    app: userReducer,
     message: MessageReducer,
     employee: EmployeeReducer,
   }

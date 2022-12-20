@@ -3,7 +3,6 @@ import { fetchEmployees } from '../../api/UserAPI'
 import ListManager from '../../Components/Employee/ListManager'
 import {useAppDispatch, useAppSelector} from '../../redux/Hooks'
 import type {RootState} from '../../redux/Store'
-import {setPage} from '../../redux/User/UserSlice'
 
 export default function Home() {
 
@@ -11,7 +10,6 @@ export default function Home() {
     const employees = useAppSelector((state: RootState) => state.employee.employees)
 
     useEffect(() => {
-        dispatch(setPage('dashboard'))
         dispatch(fetchEmployees({job: 'manager'}))
         return () => {
         }

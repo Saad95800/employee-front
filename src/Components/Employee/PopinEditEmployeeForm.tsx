@@ -43,7 +43,7 @@ export default function PopinEditEmployeeForm({context} : {context: string}) {
                 dispatch(setSal(''))
                 dispatch(setCom(''))
             }
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [showModalEditEmployee])
 
     const handleSubmit = async (e:SyntheticEvent<HTMLFormElement>)=>{
@@ -74,7 +74,6 @@ export default function PopinEditEmployeeForm({context} : {context: string}) {
                     SAL: sal !== '' ? Number(sal) : null,
                     COMM: com !== '' ? Number(com) : null,
                 })) 
-                console.log(result)
                 if(result.meta.requestStatus === 'fulfilled'){   
                     dispatch(displayMessage({text: "Employee updated successfully !", status: 'success'}))    
                     dispatch(fetchEmployees({job: ''}))         

@@ -1,7 +1,6 @@
 import {useEffect} from 'react'
-import { fetchEmployees, EmployeeInterface } from '../../api/UserAPI';
+import { fetchEmployees } from '../../api/UserAPI';
 import {useAppDispatch, useAppSelector} from '../../redux/Hooks'
-import { setPage } from '../../redux/User/UserSlice';
 import type {RootState} from '../../redux/Store'
 import PopinEmployee from '../../Components/Employee/PopinEmployee'
 import ListEmployee from '../../Components/Employee/ListEmployee';
@@ -15,11 +14,10 @@ export default function EmployeeList() {
   const context = useAppSelector((state: RootState) => state.employee.context)
 
   useEffect(() => {
-      dispatch(setPage('dashboard'))
       dispatch(fetchEmployees({job: ''}))
       return () => {
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line
   }, [])
 
   return (
@@ -39,7 +37,8 @@ export default function EmployeeList() {
         <div className="col-md-6">
             <div className="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3"> 
                 <div>
-                    <a href="#" data-bs-toggle="modal" data-bs-target=".add-new" className="btn btn-primary" onClick={()=>{
+                    <a href="/" data-bs-toggle="modal" data-bs-target=".add-new" className="btn btn-primary" onClick={(e)=>{
+                            e.preventDefault()
                             dispatch(setContext('add'))
                             dispatch(setShowModalEditEmployee(true))
                         }}><i className="bx bx-plus me-1"></i> Add New</a>
