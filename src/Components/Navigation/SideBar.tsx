@@ -19,25 +19,21 @@ export default function SideBar() {
         <hr className="sidebar-divider my-0"/>
 
         {/* <!-- Nav Item - Dashboard --> */}
-        <li className="nav-item active">
-            <Link className="nav-link" to="/dashboard">
-                <i className="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></Link>
-        </li>
+        
 
         {/* <!-- Divider --> */}
         <hr className="sidebar-divider"/>
 
-        {/* <!-- Heading --> */}
-        <div className="sidebar-heading">
-            Interface
-        </div>
-
+        <li className="nav-item">
+            <Link className="nav-link" to="/dashboard">
+                <i className="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></Link>
+        </li>
         {/* <!-- Nav Item - Pages Collapse Menu --> */}
         <li className="nav-item">
             <Link className="nav-link collapsed" to="/employees" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
-                <i className="fas fa-fw fa-cog"></i>
+                <i className="fa fa-user"></i>
                 <span>Employees List</span>
             </Link>
             <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
