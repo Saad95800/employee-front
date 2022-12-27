@@ -1,5 +1,5 @@
 import ManagerLine from './ManagerLine'
-import { EmployeeInterface } from '../../api/UserAPI'
+import { EmployeeInterface } from '../../api/EmployeeAPI'
 
 export default function ListManager({employees} : {employees: EmployeeInterface[]}) {
 

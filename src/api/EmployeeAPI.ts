@@ -1,4 +1,4 @@
-import {FULL_EMPLOYEE_API, FULL_EMPLOYEE_UPDATE_API, FULL_EMPLOYEE_ADD_API} from '../utils/Data'
+import {FULL_EMPLOYEE_API, FULL_EMPLOYEE_UPDATE_API, FULL_EMPLOYEE_ADD_API,FULL_EMPLOYEE_DELETE_API} from '../utils/Data'
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import http from '../utils/http-common'
 
@@ -56,6 +56,19 @@ export const addEmployee = createAsyncThunk<{response: any},EmployeeInterface,{r
 
     const response = (await http.post(
         FULL_EMPLOYEE_ADD_API,
+        JSON.stringify(dt),
+        )).data
+  
+    return {
+        response: response
+    }
+  
+})
+
+export const deleteEmployee = createAsyncThunk<{response: any},EmployeeInterface,{rejectValue: ValidationErrorsUser}>('employee/updateEmployee', async (dt, { rejectWithValue }) => {
+
+    const response = (await http.post(
+        FULL_EMPLOYEE_DELETE_API + dt.EMPNO,
         JSON.stringify(dt),
         )).data
   

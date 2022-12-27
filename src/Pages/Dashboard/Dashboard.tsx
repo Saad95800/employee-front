@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import { fetchEmployees } from '../../api/UserAPI'
+import { fetchEmployees } from '../../api/EmployeeAPI'
 import ListManager from '../../Components/Employee/ListManager'
 import {useAppDispatch, useAppSelector} from '../../redux/Hooks'
 import type {RootState} from '../../redux/Store'

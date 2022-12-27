@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchEmployees} from '../../api/UserAPI'
-import type {EmployeeInterface} from '../../api/UserAPI'
+import {fetchEmployees} from '../../api/EmployeeAPI'
+import type {EmployeeInterface} from '../../api/EmployeeAPI'
 import { DepartmentInterface, fetchDepartments } from "../../api/DepartmentApi";
 
 export interface EmployeeState {
@@ -9,6 +9,7 @@ export interface EmployeeState {
     employeeToEdit?: EmployeeInterface | null,
     showModalEmployee: boolean,
     showModalEditEmployee: boolean,
+    showModalDeleteEmployeeConfirm: boolean,
     context: string,
     departments: DepartmentInterface[],
     nameEmployee: string,
@@ -16,7 +17,8 @@ export interface EmployeeState {
     manager: string,
     department: string,
     sal: string,
-    com: string
+    com: string,
+    employeeToDelete: EmployeeInterface | null
 }
 
 const initialState: EmployeeState = {
@@ -25,6 +27,7 @@ const initialState: EmployeeState = {
     employeeToEdit: null,
     showModalEmployee: false,
     showModalEditEmployee: false,
+    showModalDeleteEmployeeConfirm: false,
     context: 'edit',
     departments: [],
     nameEmployee: '',
@@ -32,7 +35,8 @@ const initialState: EmployeeState = {
     manager: '',
     department: '',
     sal: '',
-    com: ''
+    com: '',
+    employeeToDelete: null
 }
 
 export const EmployeeSlice = createSlice({
@@ -72,6 +76,12 @@ export const EmployeeSlice = createSlice({
         setCom: (state, action) => {
             state.com = action.payload
         },
+        setEmployeeToDelete: (state, action) => {
+            state.employeeToDelete = action.payload
+        },
+        setShowModalDeleteEmployeeConfirm: (state, action) => {
+            state.showModalDeleteEmployeeConfirm = action.payload
+        }
     },
     extraReducers: 
     (builder) => {
@@ -96,6 +106,8 @@ export const {
     setDepartment,
     setSal,
     setCom,
-    setContext} = EmployeeSlice.actions
+    setContext,
+    setEmployeeToDelete,
+    setShowModalDeleteEmployeeConfirm} = EmployeeSlice.actions
 
 export default EmployeeSlice.reducer

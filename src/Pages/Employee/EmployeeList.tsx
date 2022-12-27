@@ -1,11 +1,12 @@
 import {useEffect} from 'react'
-import { fetchEmployees } from '../../api/UserAPI';
+import { fetchEmployees } from '../../api/EmployeeAPI';
 import {useAppDispatch, useAppSelector} from '../../redux/Hooks'
 import type {RootState} from '../../redux/Store'
 import PopinEmployee from '../../Components/Employee/PopinEmployee'
 import ListEmployee from '../../Components/Employee/ListEmployee';
 import PopinEditEmployeeForm from '../../Components/Employee/PopinEditEmployeeForm';
 import { setContext, setShowModalEditEmployee } from '../../redux/Employee/EmployeeSlice';
+import PopinDeleteEmployeeConfirm from '../../Components/Employee/PopinDeleteEmployeeConfirm';
 
 export default function EmployeeList() {
 
@@ -26,6 +27,7 @@ export default function EmployeeList() {
 {/* start list */}
 <PopinEmployee />
 <PopinEditEmployeeForm context={context} />
+<PopinDeleteEmployeeConfirm />
 
 <div className="container mt-3">
     <div className="row align-items-center">

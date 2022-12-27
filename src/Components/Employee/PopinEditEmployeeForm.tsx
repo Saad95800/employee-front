@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form"
 import { useEffect } from 'react'
 import { fetchDepartments } from '../../api/DepartmentApi'
 import { displayMessage } from '../../redux/Message/MessageSlice'
-import { fetchEmployees, updateEmployee, addEmployee } from '../../api/UserAPI'
+import { fetchEmployees, updateEmployee, addEmployee } from '../../api/EmployeeAPI'
 
 export default function PopinEditEmployeeForm({context} : {context: string}) {
 

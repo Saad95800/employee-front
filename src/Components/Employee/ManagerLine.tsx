@@ -1,8 +1,7 @@
-import type {EmployeeInterface} from '../../api/UserAPI'
-import { useAppDispatch } from '../../redux/Hooks'
+import type {EmployeeInterface} from '../../api/EmployeeAPI'
 
 export default function ManagerLine({employee}: {employee: EmployeeInterface}) {
-    const dispatch = useAppDispatch()
+
   return (
     <tr>
         <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" className="avatar-sm rounded-circle me-2" /><a href="#" className="text-body">{employee.ENAME}</a></td>

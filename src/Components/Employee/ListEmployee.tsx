@@ -1,5 +1,5 @@
 import EmployeeLine from './EmployeeLine'
-import { EmployeeInterface } from '../../api/UserAPI'
+import { EmployeeInterface } from '../../api/EmployeeAPI'
 import {useAppSelector} from '../../redux/Hooks'
 import type {RootState} from '../../redux/Store'
 
@@ -25,7 +25,7 @@ export default function ListEmployee({employees} : {employees: EmployeeInterface
                         </thead>
                         <tbody>
                         {employees?.map((employee:EmployeeInterface, index:number)=>{
-                          return <EmployeeLine employee={employee} />
+                          return <EmployeeLine key={index} employee={employee} />
                         })}
                         </tbody>
                     </table>
