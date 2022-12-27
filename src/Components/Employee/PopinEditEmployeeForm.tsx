@@ -27,7 +27,6 @@ export default function PopinEditEmployeeForm({context} : {context: string}) {
     useEffect(()=>{
             dispatch(fetchDepartments({}))
 
-
             if(employeeToEdit !== null && employeeToEdit !== undefined && context === 'edit'){
                 dispatch(setName(employeeToEdit.ENAME))
                 dispatch(setJob(employeeToEdit.JOB))
@@ -50,22 +49,26 @@ export default function PopinEditEmployeeForm({context} : {context: string}) {
 
         e.preventDefault()
 
-        if(nameEmployee === ''){
+        if(nameEmployee.length === 0){
             dispatch(displayMessage({text: "Please select a name", status: 'error'})); return false
         }
-        if(job === ''){
+        if(job.length === 0){
             dispatch(displayMessage({text: "Please select a job", status: 'error'})); return false
         }
-        if(manager === ''){
+        if(manager.length === 0){
             dispatch(displayMessage({text: "Please select  manager", status: 'error'})); return false
         }
-        if(department === ''){
+        if(department.length === 0){
             dispatch(displayMessage({text: "Please select a department", status: 'error'})); return false
         }
 
+        let result:any = null
+        let successMessage:string = ''
+        let errorMessage:string = ''
+
         if(context === 'edit'){
             if(employeeToEdit !== null && employeeToEdit !== undefined){
-                let result = await dispatch(updateEmployee({
+                result = await dispatch(updateEmployee({
                     EMPNO: employeeToEdit.EMPNO,
                     ENAME: nameEmployee,
                     JOB: job,
@@ -73,17 +76,13 @@ export default function PopinEditEmployeeForm({context} : {context: string}) {
                     DEPTNO: Number(department),
                     SAL: sal !== '' ? Number(sal) : null,
                     COMM: com !== '' ? Number(com) : null,
-                })) 
-                if(result.meta.requestStatus === 'fulfilled'){   
-                    dispatch(displayMessage({text: "Employee updated successfully !", status: 'success'}))    
-                    dispatch(fetchEmployees({job: ''}))         
-                }else{
-                    dispatch(displayMessage({text: "the employee's update failed", status: 'error'}))
-                }
+                }))
+                successMessage = "Employee updated successfully !"
+                errorMessage = "the employee's update failed"
                 
             }
         }else{
-            let result = await dispatch(addEmployee({
+            result = await dispatch(addEmployee({
                 ENAME: nameEmployee,
                 JOB: job,
                 MGRNO: Number(manager),
@@ -91,16 +90,16 @@ export default function PopinEditEmployeeForm({context} : {context: string}) {
                 SAL: sal !== '' ? Number(sal) : null,
                 COMM: com !== '' ? Number(com) : null,
             }))
-
-            if(result.meta.requestStatus === 'fulfilled'){   
-                dispatch(displayMessage({text: "Employee added successfully !", status: 'success'}))    
-                dispatch(fetchEmployees({job: ''}))         
-            }else{
-                dispatch(displayMessage({text: "the employee's add failed", status: 'error'}))
-            }
+            successMessage = "Employee added successfully !"
+            errorMessage = "the employee's add failed"
         }
 
-
+        if(result.meta.requestStatus === 'fulfilled'){   
+            dispatch(displayMessage({text: successMessage, status: 'success'}))    
+            dispatch(fetchEmployees({job: ''}))         
+        }else{
+            dispatch(displayMessage({text: errorMessage, status: 'error'}))
+        }
 
         dispatch(setShowModalEditEmployee(false)) 
 
@@ -125,11 +124,11 @@ export default function PopinEditEmployeeForm({context} : {context: string}) {
                         </div>
                         <div className="mb-4">
                             <Form.Label htmlFor="input-sal">Sal *</Form.Label>
-                            <Form.Control type="text" value={sal} name="input-title" id="input-sal" required onChange={(e)=>{dispatch(setSal(e.target.value))}}/>
+                            <Form.Control type="number" value={sal} name="input-title" id="input-sal" required onChange={(e)=>{dispatch(setSal(e.target.value))}}/>
                         </div>
                         <div className="mb-4">
                             <Form.Label htmlFor="input-com">Com *</Form.Label>
-                            <Form.Control type="text" value={com} name="input-title" id="input-com" required onChange={(e)=>{dispatch(setCom(e.target.value))}}/>
+                            <Form.Control type="number" value={com} name="input-title" id="input-com" required onChange={(e)=>{dispatch(setCom(e.target.value))}}/>
                         </div>
                         <div className="mb-4">
                             <Form.Label htmlFor="input-descriptif">Job *</Form.Label>
